@@ -61,68 +61,41 @@ Open azure portal, go to VM-2 --> Network Security Group --> Inbound Security Ru
 Once an inbound rule is created go back to VM-1 Virtual Machine and notice how the ping stops receiving packets from ICMP
 
 
+![ezgif com-gif-maker (20)](https://user-images.githubusercontent.com/121186222/215884674-9543f568-14fd-495e-a0fc-7b96e2b0c8c2.gif)
 
 
 
-
-Now lets capture SSH packets to the linux machine
-
-Set the filter to SSH packets only
-
-
-
+![ezgif com-gif-maker (18)](https://user-images.githubusercontent.com/121186222/215884680-7301a68b-684a-4244-9e84-4ff9af900aa8.gif)
 
 
 
 
 
 
+In the Wireshark set the filter to SSH packets only
+
+
+Now lets SSH  into the linux machine, in the CMD type "ssh labuser@10.0.0.6" (ssh <username>@<private ip address>), enter "YES" and then enter the passwork for the following user of the linux machine
+
+  
+Notice how it is capturing SSH packets in the Wireshark 
+  
+
+  ![ezgif com-gif-maker (19)](https://user-images.githubusercontent.com/121186222/215889080-a366d44c-b300-46d2-9852-8bff231ddc47.gif)
+
+  
+
+ 
+
+In our last step we will assign a new IP Address for the linux machine, open the CMD in VM-1 Virtual Machine and enter "ipconfig /renew". Filter DHCP in the Wireshark and notice the aptured packets.
+
+
+
+
+![ezgif com-gif-maker (21)](https://user-images.githubusercontent.com/121186222/215891161-d702f5fe-46fa-461f-bbe3-b96eec2406ac.gif)
 
 
 
 
 
 
-
-
-
-<img src="https://i.imgur.com/QEKbESo.png" height="70%" width="70%" alt="Continuous Ping"/>
-</p>
-<p>
-Now, we will send a continuous ping on VM1 to VM2 so that we can see how a Network Security Group can be used to block ICMP packets.
-</p>
-
-<p>
-<img src="https://i.imgur.com/jcHE3Oi.png" height="70%" width="70%" alt="Deny ICMP Packets Network Security Group"/>
-</p>
-<p>
-Open up VM2's Network Security Group in Azure so that we can create an Inbound security rule denying ICMP packets from anywhere.
-</p>
-
-<p>
-<img src="https://i.imgur.com/yxdfjsP.png" height="70%" width="70%" alt="Denied ICMP Packets Result"/>
-</p>
-<p>
-Open up VM1 and notice how the packets are now being denied!
-</p>
-
-<p>
-<img src="https://i.imgur.com/2FMDf8N.png" height="70%" width="70%" alt="SSH Wireshark"/>
-</p>
-<p>
-Now instead of pinging VM2, we will SSH into VM 2. Update Wireshark's filter to filter SSH packets. Next, SSH into VM2 using the "ssh <username you set up>@<VM2 Private IP>" command. If you receive a message about an ECDSA key, then type YES and when prompted, enter the password you set up. Notice how the CMD has changed and Wireshark has captured SSH packets. To close our SSH session, type exit and hit ENTER
-</p>
-
-<p>
-<img src="https://i.imgur.com/40NPfSI.png" height="70%" width="70%" alt="DHCP Wireshark"/>
-</p>
-<p>
-Next, type dhcp into the Wireshark filter and enter "ipconfig /renew" into the CMD. Notice that Wireshark has captured the DHCP packets used to request a new IP address.
-</p>
-
-<p>
-<img src="https://i.imgur.com/liJCe0X.png" height="70%" width="70%" alt="DNS Wireshark"/>
-</p>
-<p>
-After that, type dns into the Wireshark filter and (if there exists) clear the existing captures. Type "nslookup www.google.com" and observe the DNS requests used to find Google's ip address.
-</p>
